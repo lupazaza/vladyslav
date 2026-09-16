@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vladyslav | Personal Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0f19;
+      --card-bg: rgba(22, 27, 46, 0.7);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --accent-purple: #8b5cf6;
+      --accent-pink: #ec4899;
+      --accent-cyan: #06b6d4;
+      --glow: rgba(139, 92, 246, 0.25);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      background-image: 
+        radial-gradient(circle at 15% 20%, rgba(139, 92, 246, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 85% 80%, rgba(236, 72, 153, 0.15) 0%, transparent 40%);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 860px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    /* Профільна картка */
+    .hero-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      position: relative;
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+    }
+
+    .avatar-wrapper {
+      position: relative;
+      width: 110px;
+      height: 110px;
+      flex-shrink: 0;
+    }
+
+    .avatar {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 42px;
+      box-shadow: 0 0 25px var(--glow);
+    }
+
+    .status-badge {
+      position: absolute;
+      bottom: 2px;
+      right: 2px;
+      background: #10b981;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 3px solid var(--bg);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6); }
+      70% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+    }
+
+    .hero-info h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      background: linear-gradient(to right, #ffffff, #cbd5e1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+
+    .hero-info p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .tag {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+      padding: 6px 14px;
+      border-radius: 99px;
+      font-size: 0.85rem;
+      color: #cbd5e1;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Сітка інтересів */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 28px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(139, 92, 246, 0.35);
+      box-shadow: 0 12px 24px -8px var(--glow);
+    }
+
+    .card-icon {
+      font-size: 2.2rem;
+      margin-bottom: 16px;
+      display: inline-block;
+    }
+
+    .card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* Інтерактивний статус */
+    .current-status-box {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(236, 72, 153, 0.08));
+      border: 1px solid rgba(139, 92, 246, 0.25);
+      border-radius: 20px;
+      padding: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: gap;
+    }
+
+    .status-content h4 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent-purple);
+      margin-bottom: 4px;
+    }
+
+    .status-content p {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .btn-action {
+      background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .btn-action:hover {
+      opacity: 0.9;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      padding-top: 10px;
+    }
+
+    @media (max-width: 640px) {
+      .hero-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 30px 20px;
+      }
+
+      .tags {
+        justify-content: center;
+      }
+
+      .current-status-box {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+
+      .btn-action {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Шапка / Візитка -->
+    <header class="hero-card">
+      <div class="avatar-wrapper">
+        <div class="avatar">⚡</div>
+        <div class="status-badge" title="У мережі"></div>
+      </div>
+      <div class="hero-info">
+        <h1>Владислав</h1>
+        <p>Ціную щире спілкування, атмосферні цифрові світи, цікаві історії та якісний відпочинок у колі своїх людей.</p>
+        <div class="tags">
+          <span class="tag">🎮 Gamer</span>
+          <span class="tag">⛩️ Anime Fan</span>
+          <span class="tag">📱 Content Consumer</span>
+          <span class="tag">👥 Chill with Friends</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Інтерактивний поточний вайб -->
+    <div class="current-status-box">
+      <div class="status-content">
+        <h4>Поточний вайб</h4>
+        <p id="vibe-text">Зараз у мережі: граю в кооп із друзями або гортаю рекомендації 🎮</p>
+      </div>
+      <button class="btn-action" onclick="changeVibe()">Змінити вайб</button>
+    </div>
+
+    <!-- Картки інтересів -->
+    <main class="grid">
+      <article class="card">
+        <span class="card-icon">👥</span>
+        <h3>Друзі та спілкування</h3>
+        <p>Найкращий час — це час, проведений у компанії. Спільні вечори, войси в Discord, жарти та щирі розмови, які заряджають енергією.</p>
+      </article>
+
+      <article class="card">
+        <span class="card-icon">🎮</span>
+        <h3>Комп'ютерні ігри</h3>
+        <p>Захоплення динамічними світами, командними катрами та цікавими сюжетами. Спосіб кинути виклик реакції або просто розслабитися після робочого дня.</p>
+      </article>
+
+      <article class="card">
+        <span class="card-icon">⛩️</span>
+        <h3>Аніме-культура</h3>
+        <p>Ціную сильну анімацію, несподівані повороти сюжету та глибокі емоції персонажів. Завжди відкритий до якісних онґоїнґів чи класики.</p>
+      </article>
+
+      <article class="card">
+        <span class="card-icon">📱</span>
+        <h3>YouTube & TikTok</h3>
+        <p>Пошук натхнення, гумору, трендів та цікавих розборів. Нескінченний потік мемів, стрімів та якісного візуального контенту.</p>
+      </article>
+    </main>
+
+    <footer>
+      <p>© Vladyslav | Створено для передачі гарного настрою та улюбленого вайбу</p>
+    </footer>
+  </div>
+
+  <script>
+    const vibes = [
+      "Зараз у мережі: граю в кооп із друзями або гортаю рекомендації 🎮",
+      "Дивлюся новий епізод аніме з піцою 🍕",
+      "Залип у трендах TikTok та смішних шортсах 📱",
+      "Переглядаю улюбленого блогера на YouTube 🎬",
+      "Збираю паті для вечірньої катки 🎧"
+    ];
+
+    let currentIdx = 0;
+
+    function changeVibe() {
+      currentIdx = (currentIdx + 1) % vibes.length;
+      const vibeElement = document.getElementById("vibe-text");
+      vibeElement.style.opacity = '0';
+      setTimeout(() => {
+        vibeElement.textContent = vibes[currentIdx];
+        vibeElement.style.opacity = '1';
+      }, 150);
+    }
+  </script>
+</body>
+</html>
